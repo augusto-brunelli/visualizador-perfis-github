@@ -28,3 +28,10 @@ async function handleSearch() {
         clearContainer(profileResults);
     }
 }
+
+btnSearch.addEventListener('click', handleSearch);
+
+inputSearch.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        handleSearch();
+    }});
