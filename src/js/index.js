@@ -1,4 +1,4 @@
-import { fetchUserProfile, isValidUserName, showError } from './githubApi.js';
+import { fetchUserProfile, isValidUserName, showError, fetchGithubUserRepos } from './githubApi.js';
 import { renderLoading, renderUserProfile, clearContainer } from './profileView.js';
 
 const inputSearch = document.getElementById('input-search');
@@ -20,7 +20,8 @@ async function handleSearch() {
 
     try {
         const userData = await fetchUserProfile(userName);
-        renderUserProfile(userData, profileResults);
+        const userRepos = await fetchGithubUserRepos(userName);
+        renderUserProfile(userData, userRepos, profileResults);
     } catch (error) {
         console.error(error.message);
         showError(error.message);
